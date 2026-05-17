@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategic Battle Guide | Monster Hunter Wilds</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0c100d;
+      --bg-card: #1b2119;
+      --bg-soft: #262d21;
+      --gold: #d9a441;
+      --gold-light: #f2c967;
+      --green: #6f8f52;
+      --red: #a8463a;
+      --sand: #f4efd8;
+      --muted: #d7cba7;
+      --border: #3b4434;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #24301f 0%, var(--bg-dark) 42%, #070907 100%);
+      color: var(--sand);
+      line-height: 1.6;
+    }
+
+    header {
+      min-height: 430px;
+      padding: 70px 20px;
+      text-align: center;
+      background:
+        linear-gradient(rgba(12, 16, 13, 0.45), rgba(12, 16, 13, 0.95)),
+        url('https://placehold.co/1600x700?text=Monster+Hunter+Wilds+Hero');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .image-note {
+      max-width: 780px;
+      margin: 14px auto 0;
+      padding: 10px 14px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(217,164,65,.45);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 46px;
+      text-shadow: 0 4px 20px rgba(0,0,0,.75);
+    }
+
+    header p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 14px 20px;
+      background: rgba(27, 33, 25, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    nav a {
+      color: var(--sand);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--gold-light);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: auto;
+      padding: 34px 20px 64px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      font-size: 30px;
+      border-left: 5px solid var(--gold);
+      padding-left: 12px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      color: var(--gold-light);
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .battle-loop {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .loop-step {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #111;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--bg-card), #141813);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+      overflow: hidden;
+    }
+
+    .image-card {
+      padding: 0;
+    }
+
+    .image-card img {
+      height: 180px;
+      background: #111;
+    }
+
+    .image-card .content {
+      padding: 18px;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    ul, ol {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .priority-list li::marker {
+      color: var(--gold-light);
+      font-weight: bold;
+    }
+
+    .notice {
+      background: linear-gradient(135deg, #302819, #1d2118);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .good-bad {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .bad {
+      border-left: 5px solid var(--red);
+    }
+
+    .good {
+      border-left: 5px solid var(--green);
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 4px 4px 4px 0;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      color: #e4dbb0;
+      font-size: 13px;
+    }
+
+    .monster-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .monster-gallery img {
+      height: 200px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .placeholder {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(217,164,65,.25), rgba(111,143,82,.15)),
+        repeating-linear-gradient(45deg, #161b14, #161b14 10px, #1f261c 10px, #1f261c 20px);
+      color: var(--muted);
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: #070907;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 34px;
+      }
+
+      header {
+        min-height: 360px;
+        padding: 50px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Strategic Battle Guide</h1>
+    <p>Use this battle system to prepare smarter, fight safer, and improve after every attempt in Monster Hunter Wilds.</p>
+
+    <div class="battle-loop">
+      <span class="loop-step">Scout</span>
+      <span class="loop-step">Plan</span>
+      <span class="loop-step">Execute</span>
+      <span class="loop-step">Adapt</span>
+      <span class="loop-step">Review</span>
+    </div>
+
+    <p class="image-note">Replace <strong>images/mhwilds-hero.jpg</strong> with an official Capcom media image, press-kit image, or your own in-game screenshot.</p>
+  </header>
+
+  <nav>
+    <a href="#gallery">Images</a>
+    <a href="#scout">Scout</a>
+    <a href="#plan">Plan</a>
+    <a href="#execute">Execute</a>
+    <a href="#adapt">Adapt</a>
+    <a href="#review">Review</a>
+    <a href="#template">Guide Template</a>
+  </nav>
+
+  <main>
+    <section id="gallery">
+      <h2>Featured Monster Images</h2>
+      <p>Use this area to make the page feel like a real game guide. Add screenshots for monsters, maps, weapons, and quest locations.</p>
+
+      <div class="monster-gallery">
+        <article class="card image-card">
+          <img src="https://placehold.co/600x350?text=Rey+Dau" alt="Rey Dau monster screenshot" onerror="this.replaceWith(createPlaceholder('Add Rey Dau Screenshot'))">
+          <div class="content">
+            <h3>Rey Dau</h3>
+            <p>Use this image for a monster overview card, weakness guide, or attack pattern section.</p>
+          </div>
+        </article>
+
+        <article class="card image-card">
+          <img src="https://placehold.co/600x350?text=Arkveld" alt="Arkveld monster screenshot" onerror="this.replaceWith(createPlaceholder('Add Arkveld Screenshot'))">
+          <div class="content">
+            <h3>Arkveld</h3>
+            <p>Good image spot for a story boss guide or difficult battle breakdown.</p>
+          </div>
+        </article>
+
+        <article class="card image-card">
+          <img src="https://placehold.co/600x350?text=Weapon+Combat" alt="Hunter using weapon in combat" onerror="this.replaceWith(createPlaceholder('Add Weapon Combat Screenshot'))">
+          <div class="content">
+            <h3>Weapon Strategy</h3>
+            <p>Use a combat screenshot to show positioning, spacing, and attack windows.</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="caption">Tip: For a public site, use official Capcom media images, press-kit assets, or your own screenshots. Avoid stealing images from other guide websites.</p>
+    </section>
+
+    <section id="scout">
+      <h2>1. Scout: Gather Useful Information</h2>
+      <p>Before the battle, do not collect random information. Focus on details that change how you fight.</p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Enemy Analysis</h3>
+          <ul>
+            <li>Element weaknesses</li>
+            <li>Status weaknesses</li>
+            <li>Breakable parts</li>
+            <li>Attack patterns</li>
+            <li>Fast or slow movement</li>
+            <li>Ground or airborne attacks</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Battle Phases</h3>
+          <ul>
+            <li>Normal state</li>
+            <li>Enraged state</li>
+            <li>Final phase</li>
+            <li>Emergency attacks</li>
+            <li>Environment changes</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Win Condition</h3>
+          <ul>
+            <li>Slay the monster</li>
+            <li>Capture the monster</li>
+            <li>Break a specific part</li>
+            <li>Survive the timer</li>
+            <li>Protect an objective</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="plan">
+      <h2>2. Plan: Build Your Battle Setup</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Set a Clear Goal</h3>
+          <p>Example: “I want to capture the monster and break its head before the quest ends.”</p>
+          <span class="tag">Goal</span>
+          <span class="tag">Capture</span>
+          <span class="tag">Part Break</span>
+        </article>
+
+        <article class="card">
+          <h3>Pre-Battle Checklist</h3>
+          <ul>
+            <li>Correct weapon</li>
+            <li>Element resistance</li>
+            <li>Healing items</li>
+            <li>Buff items</li>
+            <li>Traps and tranq bombs</li>
+            <li>Food buffs</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Priority Order</h3>
+          <ol class="priority-list">
+            <li>Stay alive</li>
+            <li>Learn dangerous attacks</li>
+            <li>Break weak parts</li>
+            <li>Maximize damage</li>
+          </ol>
+        </article>
+      </div>
+
+      <div class="notice" style="margin-top: 18px;">
+        <strong>Important:</strong> Many players accidentally make damage their first priority. In hard fights, survival and pattern recognition come first.
+      </div>
+    </section>
+
+    <section id="execute">
+      <h2>3. Execute: Make Better Decisions During Combat</h2>
+      <div class="good-bad">
+        <article class="card bad">
+          <h3>Weak Approach</h3>
+          <p>“The guide said dodge left after this attack, so I only look for that exact move.”</p>
+        </article>
+
+        <article class="card good">
+          <h3>Better Approach</h3>
+          <p>“Heavy attacks usually create safe openings, so I should punish after the monster finishes the move.”</p>
+        </article>
+      </div>
+
+      <div class="card" style="margin-top: 18px;">
+        <h3>Combat Decision Loop</h3>
+        <ol>
+          <li>Can I safely attack?</li>
+          <li>If yes, choose a short or long combo.</li>
+          <li>If no, reposition, heal, sharpen, or wait.</li>
+          <li>Observe the monster's next move.</li>
+          <li>Repeat the loop.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="adapt">
+      <h2>4. Adapt: Change the Plan When Needed</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>If You Are Running Out of Healing</h3>
+          <p>Play safer, stop forcing attacks, and only heal after the monster finishes a big move.</p>
+        </article>
+
+        <article class="card">
+          <h3>If You Keep Getting Hit</h3>
+          <p>Focus on dodging for one minute without attacking. Learn the monster's timing first.</p>
+        </article>
+
+        <article class="card">
+          <h3>If You Lack Damage</h3>
+          <p>Target weak parts, upgrade your weapon, use buffs, and punish longer recovery windows.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="review">
+      <h2>5. Review: Improve After Losing</h2>
+      <p>Do not just say the boss is unfair. Find the exact reason you lost and fix one thing at a time.</p>
+
+      <div class="card">
+        <h3>After-Death Questions</h3>
+        <ul>
+          <li>What attack killed me?</li>
+          <li>Why was I standing there?</li>
+          <li>Was I being greedy?</li>
+          <li>Did I panic heal?</li>
+          <li>Did I ignore a phase change?</li>
+          <li>Was my gear wrong for the fight?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="template">
+      <h2>Monster Guide Page Template</h2>
+      <p>For a Monster Hunter Wilds website, every monster guide should follow this structure:</p>
+
+      <div class="grid">
+        <article class="card"><h3>1. Overview</h3><p>Short summary of the monster and what makes the fight difficult.</p></article>
+        <article class="card"><h3>2. Weaknesses</h3><p>Element, status, weak points, and breakable parts.</p></article>
+        <article class="card"><h3>3. Preparation</h3><p>Recommended weapon, armor, items, traps, and food buffs.</p></article>
+        <article class="card"><h3>4. Dangerous Attacks</h3><p>The attacks players must recognize first.</p></article>
+        <article class="card"><h3>5. Phase Changes</h3><p>How the fight changes when the monster becomes enraged or weakened.</p></article>
+        <article class="card"><h3>6. Strategy</h3><p>Where to stand, when to attack, when to heal, and how to capture.</p></article>
+        <article class="card"><h3>7. Rewards</h3><p>Materials, armor pieces, weapons, and rare drops.</p></article>
+        <article class="card"><h3>8. Common Mistakes</h3><p>Explain why players keep dying and how to fix it.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Fan-made Monster Hunter Wilds strategy guide page. Game images belong to their respective owners.</p>
+  </footer>
+
+  <script>
+    function createPlaceholder(text) {
+      const div = document.createElement('div');
+      div.className = 'placeholder';
+      div.textContent = text;
+      return div;
+    }
+  </script>
+</body>
+</html>
